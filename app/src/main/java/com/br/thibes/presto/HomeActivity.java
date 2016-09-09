@@ -21,6 +21,7 @@ public class HomeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         //botao.setOnClickListener(v -> onClick());
         // teste
+        // teste2
     }
 
     @OnClick
