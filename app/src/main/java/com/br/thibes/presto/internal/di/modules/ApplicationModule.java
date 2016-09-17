@@ -1,4 +1,4 @@
-package com.br.thibes.presto.internal.di;
+package com.br.thibes.presto.internal.di.modules;
 
 import android.content.Context;
 

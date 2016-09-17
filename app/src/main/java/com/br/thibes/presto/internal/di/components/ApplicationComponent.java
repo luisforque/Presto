@@ -1,21 +1,21 @@
-package com.br.thibes.presto.internal.di;
+package com.br.thibes.presto.internal.di.components;
 
 import android.content.Context;
 
+import com.br.thibes.presto.internal.di.modules.ApplicationModule;
 import com.br.thibes.presto.internal.executor.PostExecutionThread;
 import com.br.thibes.presto.internal.executor.ThreadExecutor;
-import com.br.thibes.presto.presentation.view.BaseActivity;
+import com.br.thibes.presto.presentation.base.BaseActivity;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
 
-@Singleton // Constraints this component to one-per-application or unscoped bindings.
+@Singleton
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
     void inject(BaseActivity baseActivity);
 
-    //Exposed to sub-graphs.
     Context context();
 
     ThreadExecutor threadExecutor();

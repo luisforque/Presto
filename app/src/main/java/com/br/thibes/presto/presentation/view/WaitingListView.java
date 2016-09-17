@@ -1,5 +1,6 @@
 package com.br.thibes.presto.presentation.view;
 
+import com.br.thibes.presto.presentation.base.AsyncDataView;
 import com.br.thibes.presto.presentation.model.WaitingItem;
 
 import java.util.List;

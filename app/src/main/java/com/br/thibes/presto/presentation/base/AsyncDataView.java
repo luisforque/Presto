@@ -1,4 +1,4 @@
-package com.br.thibes.presto.presentation.view;
+package com.br.thibes.presto.presentation.base;
 
 public interface AsyncDataView {
     void showLoading();

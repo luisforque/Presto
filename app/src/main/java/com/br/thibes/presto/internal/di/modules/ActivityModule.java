@@ -1,6 +1,8 @@
-package com.br.thibes.presto.internal.di;
+package com.br.thibes.presto.internal.di.modules;
 
 import android.app.Activity;
+
+import com.br.thibes.presto.internal.di.PerActivity;
 
 import dagger.Module;
 import dagger.Provides;

@@ -1,26 +1,19 @@
 package com.br.thibes.presto.presentation.view;
 
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 
 import com.br.thibes.presto.R;
-import com.br.thibes.presto.presentation.model.WaitingItem;
-import com.br.thibes.presto.presentation.presenter.WaitingListPresenter;
+import com.br.thibes.presto.internal.di.HasComponent;
+import com.br.thibes.presto.internal.di.components.DaggerWaitingListComponent;
+import com.br.thibes.presto.internal.di.components.WaitingListComponent;
+import com.br.thibes.presto.internal.di.modules.WaitingListModule;
+import com.br.thibes.presto.presentation.base.BaseActivity;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WaitingListActivity extends BaseActivity implements WaitingListView {
+public class WaitingListActivity extends BaseActivity implements HasComponent<WaitingListComponent> {
 
-    @Inject
-    WaitingListPresenter waitingListPresenter;
-
-    @BindView(R.id.waiting_list_recycler_view)
-    RecyclerView recyclerView;
+    private WaitingListComponent userComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,61 +21,29 @@ public class WaitingListActivity extends BaseActivity implements WaitingListView
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
-        this.recyclerView.setHasFixedSize(true);
-        this.waitingListPresenter.create();
-    }
+        this.initializeInjector();
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        this.waitingListPresenter.resume();
+        addFragment(R.id.waiting_list_fragment_container, new WaitingListFragment());
     }
 
 
     @Override
-    protected void onPause() {
-        this.waitingListPresenter.pause();
-        super.onPause();
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    private void initializeInjector() {
+        this.userComponent = DaggerWaitingListComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
+                .presenterModule(getPresenterModule())
+                .waitingListModule(new WaitingListModule())
+                .build();
     }
 
     @Override
-    protected void onDestroy() {
-        this.waitingListPresenter.destroy();
-        super.onDestroy();
+    public WaitingListComponent getComponent() {
+        return userComponent;
     }
 
-    @Override
-    public void updateItem(WaitingItem item) {
-
-    }
-
-    @Override
-    public void updateList(List<WaitingItem> item) {
-
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showError() {
-
-    }
-
-    @Override
-    public void showRefresh() {
-
-    }
-
-    @Override
-    public void hideRefresh() {
-
-    }
 }
