@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/waiting_list_recycler_view"
         android:layout_width="match_parent"
@@ -11,9 +10,21 @@
         android:scrollbars="vertical" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/waiting_list_fab"
+        android:id="@+id/waiting_list_refresh_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginEnd="@dimen/fab_margin"
         android:src="@drawable/ic_autorenew_white_24dp" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/waiting_list_new_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/waiting_list_refresh_fab"
+        android:layout_alignEnd="@id/waiting_list_refresh_fab"
+        android:layout_marginBottom="@dimen/fab_margin_bottom"
+        android:src="@drawable/ic_add_white_24dp" />
 </RelativeLayout>

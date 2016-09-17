@@ -5,7 +5,7 @@ import android.app.Activity;
 import com.br.thibes.presto.internal.subscription.DefaultSubscriber;
 import com.br.thibes.presto.presentation.model.WaitingItem;
 
-public class WaitingListPresenter extends DefaultSubscriber<WaitingItem> implements BasePresenter {
+public class WaitingListPresenter extends DefaultSubscriber<WaitingItem> implements IWaitingListPresenter {
 
     @Override
     public void setView(Activity view) {
@@ -50,5 +50,20 @@ public class WaitingListPresenter extends DefaultSubscriber<WaitingItem> impleme
     @Override
     public void onStart() {
         super.onStart();
+    }
+
+    @Override
+    public void refresh() {
+
+    }
+
+    @Override
+    public void addNew() {
+
+    }
+
+    @Override
+    public void itemClick(WaitingItem item) {
+
     }
 }

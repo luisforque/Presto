@@ -7,7 +7,6 @@ import com.br.thibes.presto.internal.analytics.AnalyticsTrackers;
 import com.br.thibes.presto.internal.di.components.ApplicationComponent;
 import com.br.thibes.presto.internal.di.components.DaggerApplicationComponent;
 import com.br.thibes.presto.internal.di.modules.ApplicationModule;
-import com.squareup.leakcanary.LeakCanary;
 
 public class AndroidApplication extends Application {
 
@@ -37,7 +36,8 @@ public class AndroidApplication extends Application {
 
     private void initializeLeakDetection() {
         if (BuildConfig.DEBUG) {
-            LeakCanary.install(this);
+            // TODO leak canary is not working correctly.
+            //LeakCanary.install(this);
         }
     }
 }

@@ -14,6 +14,7 @@ For that reason, we plan to implement the project using:
 ###### Design
 * Material Design
 * Recycler View
+* Coordinator Layout
 
 ###### Helpers
 * Firebase
@@ -31,6 +32,7 @@ For that reason, we plan to implement the project using:
 * Retrofit
 * ReactiveX
 * Retrolambda
+* LeakCanary
 
 ###### Good practices
 * Unit test
