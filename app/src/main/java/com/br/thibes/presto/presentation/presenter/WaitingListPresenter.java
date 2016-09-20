@@ -1,15 +1,27 @@
 package com.br.thibes.presto.presentation.presenter;
 
-import android.app.Activity;
-
+import com.br.thibes.presto.domain.interactor.UseCase;
 import com.br.thibes.presto.internal.subscription.DefaultSubscriber;
+import com.br.thibes.presto.presentation.base.BaseFragment;
 import com.br.thibes.presto.presentation.model.WaitingItem;
+import com.br.thibes.presto.presentation.view.WaitingListFragment;
+
+import java.util.List;
+
+import javax.inject.Named;
 
 public class WaitingListPresenter extends DefaultSubscriber<WaitingItem> implements IWaitingListPresenter {
 
-    @Override
-    public void setView(Activity view) {
+    private final UseCase getWaitingListUseCase;
+    private WaitingListFragment view;
 
+    public WaitingListPresenter(@Named("waitingList") UseCase getWaitingListUseCase) {
+        this.getWaitingListUseCase = getWaitingListUseCase;
+    }
+
+    @Override
+    public void setView(BaseFragment view) {
+        this.view = (WaitingListFragment) view;
     }
 
     @Override
@@ -19,7 +31,8 @@ public class WaitingListPresenter extends DefaultSubscriber<WaitingItem> impleme
 
     @Override
     public void resume() {
-
+        view.showLoading();
+        getWaitingListUseCase.execute(new WaitingListSubscriber());
     }
 
     @Override
@@ -65,5 +78,26 @@ public class WaitingListPresenter extends DefaultSubscriber<WaitingItem> impleme
     @Override
     public void itemClick(WaitingItem item) {
 
+    }
+
+    private final class WaitingListSubscriber extends DefaultSubscriber<List<WaitingItem>> {
+        @Override
+        public void onCompleted() {
+            super.onCompleted();
+            WaitingListPresenter.this.view.hideLoading();
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            super.onError(e);
+            WaitingListPresenter.this.view.hideLoading();
+            WaitingListPresenter.this.view.showError();
+        }
+
+        @Override
+        public void onNext(List<WaitingItem> waitingItems) {
+            super.onNext(waitingItems);
+            WaitingListPresenter.this.view.updateList(waitingItems);
+        }
     }
 }

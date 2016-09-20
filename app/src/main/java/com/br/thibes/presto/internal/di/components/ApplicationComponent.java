@@ -21,5 +21,5 @@ public interface ApplicationComponent {
     ThreadExecutor threadExecutor();
 
     PostExecutionThread postExecutionThread();
-    //UserRepository userRepository();
+    //WaitingDataRepository userRepository();
 }

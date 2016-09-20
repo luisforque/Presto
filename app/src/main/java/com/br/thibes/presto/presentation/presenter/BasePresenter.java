@@ -1,9 +1,9 @@
 package com.br.thibes.presto.presentation.presenter;
 
-import android.app.Activity;
+import com.br.thibes.presto.presentation.base.BaseFragment;
 
 public interface BasePresenter {
-    void setView(Activity view);
+    void setView(BaseFragment view);
 
     void create();
 

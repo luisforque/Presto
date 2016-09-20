@@ -54,7 +54,7 @@ public class ApplicationModule {
 //
 //    @Provides
 //    @Singleton
-//    UserRepository provideUserRepository(UserDataRepository userDataRepository) {
+//    WaitingDataRepository provideUserRepository(UserDataRepository userDataRepository) {
 //        return userDataRepository;
 //    }
 }

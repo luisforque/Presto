@@ -5,6 +5,11 @@ public class WaitingItem {
     private String title;
     private String time;
 
+    public WaitingItem(String title, String time) {
+        this.title = title;
+        this.time = time;
+    }
+
     public String getTitle() {
         return title;
     }

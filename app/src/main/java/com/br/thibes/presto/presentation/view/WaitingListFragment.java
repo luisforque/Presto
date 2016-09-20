@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.br.thibes.presto.R;
 import com.br.thibes.presto.internal.di.components.WaitingListComponent;
@@ -27,12 +29,16 @@ public class WaitingListFragment extends BaseFragment implements WaitingListView
 
     @Inject
     WaitingListPresenter waitingListPresenter;
+    @BindView(R.id.waiting_list_progress_bar)
+    ProgressBar progressBar;
     @BindView(R.id.waiting_list_recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.waiting_list_new_fab)
     FloatingActionButton newItemFab;
     @BindView(R.id.waiting_list_refresh_fab)
     FloatingActionButton refreshListFab;
+    @BindView(R.id.waiting_list_error_message)
+    TextView errorTextView;
     private Unbinder butterKnifeUnbinder;
 
     @Override
@@ -92,27 +98,36 @@ public class WaitingListFragment extends BaseFragment implements WaitingListView
 
     @Override
     public void showLoading() {
-
+        recyclerView.setVisibility(View.GONE);
+        newItemFab.setVisibility(View.GONE);
+        refreshListFab.setVisibility(View.GONE);
+        errorTextView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        recyclerView.setVisibility(View.VISIBLE);
+        newItemFab.setVisibility(View.VISIBLE);
+        refreshListFab.setVisibility(View.GONE);
+        errorTextView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void showError() {
-
+        recyclerView.setVisibility(View.GONE);
+        errorTextView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showRefresh() {
-
+        refreshListFab.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideRefresh() {
-
+        refreshListFab.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.waiting_list_refresh_fab)

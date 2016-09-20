@@ -1,26 +1,31 @@
 package com.br.thibes.presto.internal.di.modules;
 
+import com.br.thibes.presto.domain.interactor.GetWaitingItem;
+import com.br.thibes.presto.domain.interactor.GetWaitingList;
 import com.br.thibes.presto.domain.interactor.UseCase;
 import com.br.thibes.presto.internal.di.PerActivity;
+
+import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
 
 @Module
 public class WaitingListModule {
-    // TODO change abstract class use case to use its children
     public WaitingListModule() {
     }
 
     @Provides
     @PerActivity
-    UseCase provideGetUserListUseCase(UseCase getUserListUseCase) {
-        return getUserListUseCase;
+    @Named("waitingList")
+    UseCase provideGetWaitingListUseCase(GetWaitingList getWaitingListUseCase) {
+        return getWaitingListUseCase;
     }
 
     @Provides
     @PerActivity
-    UseCase provideGetUserDetailsUseCase(UseCase getUserDetailsUseCase) {
-        return getUserDetailsUseCase;
+    @Named("waitingItem")
+    UseCase provideGetUserDetailsUseCase(GetWaitingItem getWaitingItemUseCase) {
+        return getWaitingItemUseCase;
     }
 }
