@@ -7,6 +7,7 @@ import com.br.thibes.presto.internal.analytics.AnalyticsTrackers;
 import com.br.thibes.presto.internal.di.components.ApplicationComponent;
 import com.br.thibes.presto.internal.di.components.DaggerApplicationComponent;
 import com.br.thibes.presto.internal.di.modules.ApplicationModule;
+import com.br.thibes.presto.internal.exception.UncaughtException;
 
 public class AndroidApplication extends Application {
 
@@ -18,6 +19,11 @@ public class AndroidApplication extends Application {
         this.initializeInjector();
         this.initializeLeakDetection();
         this.initializeAnalytics();
+        this.initializeExceptionHandler();
+    }
+
+    private void initializeExceptionHandler() {
+        Thread.setDefaultUncaughtExceptionHandler(new UncaughtException(this));
     }
 
     private void initializeAnalytics() {

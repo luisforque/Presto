@@ -2,6 +2,8 @@ package com.br.thibes.presto.internal.di.modules;
 
 import android.content.Context;
 
+import com.br.thibes.presto.data.WaitingDataFactory;
+import com.br.thibes.presto.data.WaitingDataRepository;
 import com.br.thibes.presto.internal.application.AndroidApplication;
 import com.br.thibes.presto.internal.executor.JobExecutor;
 import com.br.thibes.presto.internal.executor.PostExecutionThread;
@@ -46,15 +48,15 @@ public class ApplicationModule {
         return uiThread;
     }
 
-//    @Provides
+    //    @Provides
 //    @Singleton
 //    UserCache provideUserCache(UserCacheImpl userCache) {
 //        return userCache;
 //    }
 //
-//    @Provides
-//    @Singleton
-//    WaitingDataRepository provideUserRepository(UserDataRepository userDataRepository) {
-//        return userDataRepository;
-//    }
+    @Provides
+    @Singleton
+    WaitingDataRepository provideWaitingDataRepository(WaitingDataFactory waitingDataFactory) {
+        return waitingDataFactory;
+    }
 }

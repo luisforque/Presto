@@ -5,4 +5,5 @@
     <dimen name="fab_margin">20dp</dimen>
     <dimen name="fab_margin_bottom">15dp</dimen>
     <dimen name="error_message_text_size">30sp</dimen>
+    <dimen name="recycler_view_item_margin">16dp</dimen>
 </resources>

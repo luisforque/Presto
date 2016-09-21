@@ -3,6 +3,7 @@ package com.br.thibes.presto.presentation.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.br.thibes.presto.R;
 import com.br.thibes.presto.internal.di.components.WaitingListComponent;
+import com.br.thibes.presto.presentation.adapter.RecyclerAdapter;
 import com.br.thibes.presto.presentation.base.BaseFragment;
 import com.br.thibes.presto.presentation.model.WaitingItem;
 import com.br.thibes.presto.presentation.presenter.WaitingListPresenter;
@@ -56,7 +58,11 @@ public class WaitingListFragment extends BaseFragment implements WaitingListView
         this.butterKnifeUnbinder = ButterKnife.bind(this, fragmentView);
 
         this.recyclerView.setHasFixedSize(true);
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
         this.waitingListPresenter.create();
+        this.waitingListPresenter.setView(this);
         return fragmentView;
     }
 
@@ -92,8 +98,10 @@ public class WaitingListFragment extends BaseFragment implements WaitingListView
     }
 
     @Override
-    public void updateList(List<WaitingItem> item) {
-        this.recyclerView.getAdapter().notifyDataSetChanged();
+    public void updateList(List<WaitingItem> items) {
+        RecyclerAdapter adapter = new RecyclerAdapter(items);
+        this.recyclerView.setAdapter(adapter);
+        //this.recyclerView.getAdapter().notifyDataSetChanged();
     }
 
     @Override
@@ -109,7 +117,7 @@ public class WaitingListFragment extends BaseFragment implements WaitingListView
     public void hideLoading() {
         recyclerView.setVisibility(View.VISIBLE);
         newItemFab.setVisibility(View.VISIBLE);
-        refreshListFab.setVisibility(View.GONE);
+        refreshListFab.setVisibility(View.VISIBLE);
         errorTextView.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
     }

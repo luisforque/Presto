@@ -2,6 +2,7 @@ package com.br.thibes.presto.internal.di.components;
 
 import android.content.Context;
 
+import com.br.thibes.presto.data.WaitingDataRepository;
 import com.br.thibes.presto.internal.di.modules.ApplicationModule;
 import com.br.thibes.presto.internal.executor.PostExecutionThread;
 import com.br.thibes.presto.internal.executor.ThreadExecutor;
@@ -21,5 +22,6 @@ public interface ApplicationComponent {
     ThreadExecutor threadExecutor();
 
     PostExecutionThread postExecutionThread();
-    //WaitingDataRepository userRepository();
+
+    WaitingDataRepository waitingDataRepository();
 }

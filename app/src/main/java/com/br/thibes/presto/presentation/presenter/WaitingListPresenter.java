@@ -1,6 +1,7 @@
 package com.br.thibes.presto.presentation.presenter;
 
 import com.br.thibes.presto.domain.interactor.UseCase;
+import com.br.thibes.presto.internal.log.thibesLog;
 import com.br.thibes.presto.internal.subscription.DefaultSubscriber;
 import com.br.thibes.presto.presentation.base.BaseFragment;
 import com.br.thibes.presto.presentation.model.WaitingItem;
@@ -84,19 +85,30 @@ public class WaitingListPresenter extends DefaultSubscriber<WaitingItem> impleme
         @Override
         public void onCompleted() {
             super.onCompleted();
+            thibesLog.d("on completed");
             WaitingListPresenter.this.view.hideLoading();
         }
 
         @Override
         public void onError(Throwable e) {
-            super.onError(e);
-            WaitingListPresenter.this.view.hideLoading();
-            WaitingListPresenter.this.view.showError();
+            try {
+                super.onError(e);
+                thibesLog.e("estou no erro!", e);
+                WaitingListPresenter.this.view.hideLoading();
+                WaitingListPresenter.this.view.showError();
+            } catch (Throwable ee) {
+                //  thibesLog.e("estou no erro!", e);
+                //thibesLog.e("estou no erro!", ee);
+            }
         }
 
         @Override
         public void onNext(List<WaitingItem> waitingItems) {
             super.onNext(waitingItems);
+            thibesLog.d("on next");
+            for (WaitingItem item : waitingItems) {
+                thibesLog.d(item.getTitle());
+            }
             WaitingListPresenter.this.view.updateList(waitingItems);
         }
     }

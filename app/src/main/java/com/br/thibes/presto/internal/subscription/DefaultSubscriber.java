@@ -1,10 +1,6 @@
 package com.br.thibes.presto.internal.subscription;
 
 public class DefaultSubscriber<T> extends rx.Subscriber<T> {
-    @Override
-    public void onStart() {
-        // no-op by default.
-    }
 
     @Override
     public void onCompleted() {

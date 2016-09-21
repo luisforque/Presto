@@ -9,12 +9,12 @@ import android.widget.TextView;
 import com.br.thibes.presto.R;
 import com.br.thibes.presto.presentation.model.WaitingItem;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
-    ArrayList<WaitingItem> items;
+    List<WaitingItem> items;
 
-    public RecyclerAdapter(ArrayList<WaitingItem> list) {
+    public RecyclerAdapter(List<WaitingItem> list) {
         this.items = list;
     }
 
